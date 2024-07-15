@@ -1,5 +1,6 @@
 // Square
 const Cuadrado = ( {index, modificarTablero, children, esSeleccionado} ) => {
+    
     const className = `cuadrado ${esSeleccionado ? 'seleccionado' : ''}`
     
     const handleClick = () => {

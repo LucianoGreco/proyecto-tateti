@@ -1,8 +1,10 @@
-import { useState } from "react"
-import Cuadrado from "./components/Cuadrado"
-import confetti from "canvas-confetti"
-import {TURNOS} from "./constante" // Se desectructura por que son dos funciones distintas en el mismo archivo
-import comprobarGanador from "./logic/tablero"
+import { useState }                                 from "react"
+import confetti                                     from "canvas-confetti"
+import {TURNOS}                                     from "./constante" // Se desectructura por que son dos funciones distintas en el mismo archivo
+import { comprobarGanador, comprobarJuegoFinal }    from "./logic/tablero"
+import Cuadrado                                     from "./components/Cuadrado"
+import { GanadorModal }                             from "./components/GanadorModal"
+
 
 
 function App() {
@@ -59,50 +61,36 @@ function App() {
      setTurno(TURNOS.x)
      setGanador(null)
  }
- //checkEndGame
- const comprobarJuegoFinal = (nuevoTablero) => {
-     return nuevoTablero.every((cuadrado)=> cuadrado !== null)
- }
- 
+
  // Renderizado
  return (
   <main className="tablero">
-      <h1>TA TE TI</h1>
-      <button onClick={resetearJuego}>Resetear el Juego</button>
-      <section className="juego">{ 
-          tablero.map((cuadrado,index) => {
-              return( // {tablero[index]}
-                  <Cuadrado key={index} index={index} modificarTablero={modificarTablero}>
-                      {cuadrado} 
-                  </Cuadrado>
-              )})}
-      </section>
-      
-      <section className="turno">
-          <Cuadrado esSeleccionado={turno === TURNOS.x}> {TURNOS.x} </Cuadrado>
-          <Cuadrado esSeleccionado={turno === TURNOS.o}> {TURNOS.o} </Cuadrado>
-      </section>
 
-      {ganador !== null && (
-          <section className="ganador">
-              <div className="texto">
+        <h1>TA TE TI</h1>
 
-                  <h2>{ganador === false ? 'Empate': 'Gano:'}</h2>
+        <button onClick={resetearJuego}>Resetear el Juego</button>
 
-                  <header className="gana">
-                      {ganador && <Cuadrado>{ganador}</Cuadrado>}
-                  </header>
+        <section className="juego">{ 
 
-                  <footer>
-                      <button onClick={resetearJuego}>Empezar de nuevo</button>
-                  </footer>
-              </div>
-          </section>
-      )}
+            tablero.map((cuadrado,index) => {
+                return( // {tablero[index]}
+                    <Cuadrado key={index} index={index} modificarTablero={modificarTablero}>
+                        {cuadrado} 
+                        {/* {'Pija'} */}
+                    </Cuadrado>
+                )})}
 
-      
-  </main>
- )
+        </section>
+        
+        <section className="turno">
+            <Cuadrado esSeleccionado={turno === TURNOS.x}> {TURNOS.x} </Cuadrado>
+            <Cuadrado esSeleccionado={turno === TURNOS.o}> {TURNOS.o} </Cuadrado>
+        </section>
+    
+        <GanadorModal resetearJuego={resetearJuego} ganador={ganador}/>
+
+    </main>
+    )
 }
 export default App
 

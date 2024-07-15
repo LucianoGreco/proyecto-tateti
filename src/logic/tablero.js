@@ -2,7 +2,7 @@
 import { COMBINACIONES_GANADORAS } from "../constante";
 
 //CheckWinner
-const comprobarGanador = (comprobarnuevoTablero) =>{
+export const comprobarGanador = ( comprobarnuevoTablero ) =>{
 
     /* const COMBINACIONES_GANADORAS = [
                 a|b|c    
@@ -23,21 +23,26 @@ const comprobarGanador = (comprobarnuevoTablero) =>{
     // [X|O|O] 
     // [X|O|X]
    
-        console.log(comprobarnuevoTablero);
-   
-        // busca similitud con las combinaciones ganadoras
-        for(const combinacion of COMBINACIONES_GANADORAS){
-            //     x o x
-            const [a,b,c] = combinacion
-   
-            if(
-                comprobarnuevoTablero[a] &&                          // [a] existe
-                comprobarnuevoTablero[a] === comprobarnuevoTablero[b] &&  // [a] y [b] son iguales
-                comprobarnuevoTablero[a] === comprobarnuevoTablero[c]     // [a] y [c] son iguales
-            ){
-                return comprobarnuevoTablero[a]                      // [a] es e ganador (x u o)
-            }                                        // Null no hay ganador
-        }
-        return null  
+    console.log(comprobarnuevoTablero);
+
+    // busca similitud con las combinaciones ganadoras
+    for(const combinacion of COMBINACIONES_GANADORAS){
+        //     x o x
+        const [a,b,c] = combinacion
+
+        if(
+            comprobarnuevoTablero[a] &&                          // [a] existe
+            comprobarnuevoTablero[a] === comprobarnuevoTablero[b] &&  // [a] y [b] son iguales
+            comprobarnuevoTablero[a] === comprobarnuevoTablero[c]     // [a] y [c] son iguales
+        ){
+            return comprobarnuevoTablero[a]                      // [a] es e ganador (x u o)
+        }                                        // Null no hay ganador
     }
-    export default comprobarGanador;
+    return null  
+}
+
+ //checkEndGame
+export const comprobarJuegoFinal = (nuevoTablero) => {
+    // revisa si hay un empate (si no hay )
+    return nuevoTablero.every((cuadrado)=> cuadrado !== null)
+}
